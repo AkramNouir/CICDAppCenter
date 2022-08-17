@@ -12,7 +12,7 @@ class CICDApplication : Application() {
         super.onCreate()
 
         AppCenter.start(
-            this, "5ee244d9-c5ba-4707-aa5a-97e9c9a21998",
+            this, "89abec65-4217-403c-b68b-a1f8a660539a",
             Analytics::class.java, Crashes::class.java
         )
     }
