@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 
                 Log.e("Event", "event sent !!")
 
+                binding.resultTextView.text = "At the moment rate of $interestRate% saving $monthly"
+
             } catch (ex: Exception) {
                 Analytics.trackEvent(ex.message)
             }
