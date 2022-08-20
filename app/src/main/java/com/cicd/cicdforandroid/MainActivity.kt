@@ -2,9 +2,11 @@ package com.cicd.cicdforandroid
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cicd.cicdforandroid.databinding.ActivityMainBinding
 import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes
 
 private lateinit var binding: ActivityMainBinding
 
@@ -16,8 +18,15 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.calculateButton.setOnClickListener {
+        val future = Crashes.hasCrashedInLastSession()
+        future.thenAccept {
+            if (it) {
+                Toast.makeText(this, "Oops ! Sorry about that !!", Toast.LENGTH_SHORT).show()
+            }
+        }
 
+        binding.calculateButton.setOnClickListener {
+            Crashes.generateTestCrash()
             try {
                 val interestRate = binding.interestEditText.text.toString().toFloat()
                 val currentAge = binding.ageEditText.text.toString().toInt()
