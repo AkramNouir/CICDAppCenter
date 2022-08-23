@@ -7,6 +7,7 @@ pipeline {
     // Stop the build early in case of compile or test failures
     skipStagesAfterUnstable()
   }
+  stages {
   stage('Detect build type') {
     steps {
       script {
@@ -24,5 +25,6 @@ pipeline {
       // Compile the app and its dependencies
       sh './gradlew compile${BUILD_TYPE}Sources'
     }
+  }
   }
 }
