@@ -12,9 +12,9 @@ pipeline {
     steps {
       script {
         if (env.BRANCH_NAME == 'develop' || env.CHANGE_TARGET == 'develop') {
-          env.BUILD_TYPE = 'debug'
+          env.BUILD_TYPE = 'Debug'
         } else if (env.BRANCH_NAME == 'master' || env.CHANGE_TARGET == 'master') {
-          env.BUILD_TYPE = 'release'
+          env.BUILD_TYPE = 'Release'
         }
       }
     }
@@ -22,8 +22,9 @@ pipeline {
 
   stage('Compile') {
     steps {
+      echo 'Start assemble application ${BUILD_TYPE}'
       // Compile the app and its dependencies
-      sh './gradlew compile${BUILD_TYPE}Sources'
+      sh './gradlew assemble${BUILD_TYPE}'
     }
   }
   }
